@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.limit(10).includes(:photos)
+    @posts = Post.limit(10).includes(:photos).order('created_at DESC')
   end
 
   def new
@@ -18,8 +18,8 @@ class PostsController < ApplicationController
       end
     else
       # redirect_to root_path
-      render 'new'
       flash[:alert] = "投稿に失敗しました"
+      render 'new'
     end
   end
 
